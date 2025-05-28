@@ -695,47 +695,47 @@ class BagelImageEdit:
     FUNCTION = "edit_image"
     CATEGORY = "BAGEL/Core"
 
-    @classmethod
-    def VALIDATE_INPUTS(
-        cls,
-        model,
-        image,
-        prompt,
-        seed,
-        cfg_text_scale,
-        cfg_img_scale,
-        num_timesteps,
-        **kwargs,
-    ):
-        """Validate input parameters"""
-        if not isinstance(prompt, str) or not prompt.strip():
-            return "Prompt must be a non-empty string"
+    #@classmethod
+    #def VALIDATE_INPUTS(
+    #    cls,
+    #    model,
+    #    image,
+    #    prompt,
+    #    seed,
+    #    cfg_text_scale,
+    #    cfg_img_scale,
+    #    num_timesteps,
+    #    **kwargs,
+    #):
+    #    """Validate input parameters"""
+    #    if not isinstance(prompt, str) or not prompt.strip():
+    #        return "Prompt must be a non-empty string"
 
-        if not isinstance(seed, int) or seed < 0:
-            return "Seed must be a non-negative integer"
+    #    if not isinstance(seed, int) or seed < 0:
+    #        return "Seed must be a non-negative integer"
 
-        if (
-            not isinstance(cfg_text_scale, (int, float))
-            or cfg_text_scale < 1.0
-            or cfg_text_scale > 8.0
-        ):
-            return "cfg_text_scale must be between 1.0 and 8.0"
+    #    if (
+    #        not isinstance(cfg_text_scale, (int, float))
+    #        or cfg_text_scale < 1.0
+    #        or cfg_text_scale > 8.0
+    #    ):
+    #        return "cfg_text_scale must be between 1.0 and 8.0"
 
-        if (
-            not isinstance(cfg_img_scale, (int, float))
-            or cfg_img_scale < 1.0
-            or cfg_img_scale > 4.0
-        ):
-            return "cfg_img_scale must be between 1.0 and 4.0"
+    #    if (
+    #        not isinstance(cfg_img_scale, (int, float))
+    #        or cfg_img_scale < 1.0
+    #        or cfg_img_scale > 4.0
+    #    ):
+    #        return "cfg_img_scale must be between 1.0 and 4.0"
 
-        if (
-            not isinstance(num_timesteps, int)
-            or num_timesteps < 10
-            or num_timesteps > 100
-        ):
-            return "num_timesteps must be between 10 and 100"
+    #    if (
+    #        not isinstance(num_timesteps, int)
+    #        or num_timesteps < 10
+    #        or num_timesteps > 100
+    #    ):
+    #        return "num_timesteps must be between 10 and 100"
 
-        return True
+    #    return True
 
     def edit_image(
         self,
@@ -876,24 +876,24 @@ class BagelImageUnderstanding:
     FUNCTION = "understand_image"
     CATEGORY = "BAGEL/Core"
 
-    @classmethod
-    def VALIDATE_INPUTS(cls, model, image, prompt, **kwargs):
-        """Validate input parameters"""
-        if not isinstance(prompt, str) or not prompt.strip():
-            return "Prompt must be a non-empty string"
+    #@classmethod
+    #def VALIDATE_INPUTS(cls, model, image, prompt, **kwargs):
+    #    """Validate input parameters"""
+    #    if not isinstance(prompt, str) or not prompt.strip():
+    #        return "Prompt must be a non-empty string"
 
         # Validate optional parameters
-        if "text_temperature" in kwargs:
-            temp = kwargs["text_temperature"]
-            if not isinstance(temp, (int, float)) or temp < 0.0 or temp > 1.0:
-                return "text_temperature must be between 0.0 and 1.0"
+    #    if "text_temperature" in kwargs:
+    #        temp = kwargs["text_temperature"]
+    #        if not isinstance(temp, (int, float)) or temp < 0.0 or temp > 1.0:
+    #            return "text_temperature must be between 0.0 and 1.0"
 
-        if "max_new_tokens" in kwargs:
-            tokens = kwargs["max_new_tokens"]
-            if not isinstance(tokens, int) or tokens < 64 or tokens > 4096:
-                return "max_new_tokens must be between 64 and 4096"
+    #    if "max_new_tokens" in kwargs:
+    #        tokens = kwargs["max_new_tokens"]
+    #        if not isinstance(tokens, int) or tokens < 64 or tokens > 4096:
+    #            return "max_new_tokens must be between 64 and 4096"
 
-        return True
+    #    return True
 
     def understand_image(
         self,
