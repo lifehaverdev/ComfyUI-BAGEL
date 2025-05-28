@@ -455,29 +455,44 @@ class BagelTextToImage:
     ):
         """Validate input parameters"""
         if not isinstance(prompt, str) or not prompt.strip():
-            return "Prompt must be a non-empty string"
+            return "prompt - Prompt must be a non-empty string"
 
         if not isinstance(seed, int) or seed < 0:
-            return "Seed must be a non-negative integer"
+            return "seed - Seed must be a non-negative integer"
 
         if image_ratio not in ["1:1", "4:3", "3:4", "16:9", "9:16"]:
-            return f"Invalid image_ratio: {image_ratio}"
+            return f"image_ratio - Invalid image_ratio: {image_ratio}"
 
         if (
             not isinstance(cfg_text_scale, (int, float))
-            or cfg_text_scale < 1.0
-            or cfg_text_scale > 8.0
+            or not (1.0 <= cfg_text_scale <= 8.0)
         ):
-            return "cfg_text_scale must be between 1.0 and 8.0"
+            return "cfg_text_scale - Must be between 1.0 and 8.0"
 
-        if (
-            not isinstance(num_timesteps, int)
-            or num_timesteps < 10
-            or num_timesteps > 100
-        ):
-            return "num_timesteps must be between 10 and 100"
+        if not isinstance(num_timesteps, int) or not (10 <= num_timesteps <= 100):
+            return "num_timesteps - Must be between 10 and 100"
+
+        # Now handle optional fields if passed
+        if "cfg_interval" in kwargs and not isinstance(kwargs["cfg_interval"], (float, int)):
+            return "cfg_interval - Must be a float"
+
+        if "show_thinking" in kwargs and not isinstance(kwargs["show_thinking"], bool):
+            return "show_thinking - Must be a boolean"
+
+        if "timestep_shift" in kwargs and not isinstance(kwargs["timestep_shift"], (float, int)):
+            return "timestep_shift - Must be a float"
+
+        if "cfg_renorm_min" in kwargs and not isinstance(kwargs["cfg_renorm_min"], (float, int)):
+            return "cfg_renorm_min - Must be a float"
+
+        if "cfg_renorm_type" in kwargs and kwargs["cfg_renorm_type"] not in ["global", "local", "text_channel"]:
+            return "cfg_renorm_type - Invalid option"
+
+        if "text_temperature" in kwargs and not isinstance(kwargs["text_temperature"], (float, int)):
+            return "text_temperature - Must be a float"
 
         return True
+
 
     def generate_image(
         self,
